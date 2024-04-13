@@ -9,6 +9,10 @@ const config = {
 				bittersweet: '#FF6969',
 				venetian_red: '#C70039',
 				regal_blue: '#141E46'
+			},
+			fontFamily: {
+				courgette: ['Courgette', 'cursive'],
+				roboto: ['Roboto', 'sans-serif']
 			}
 		}
 	},

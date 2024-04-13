@@ -1,67 +1,74 @@
 <script lang="ts">
 	import * as htmlToImage from 'html-to-image';
+	import DayEntry from './DayEntry.svelte';
+	import { dayEntries as _dayEntries } from './data';
+
 	let tableMarkup: HTMLElement;
 	let printable: HTMLElement;
-	let dayMarkup: HTMLDivElement;
 
-	const generateImage = (node: HTMLElement) => {
+	const downloadImage = (node: HTMLElement) => {
 		htmlToImage
 			.toPng(node)
 			.then(function (dataUrl) {
-				var img = new Image();
-				img.src = dataUrl;
-				document.body.appendChild(img);
+				// let img = new Image();
+				// img.src = dataUrl;
+				// img.style.marginTop = '40px';
+				// document.body.appendChild(img);
+				let link = document.createElement('a');
+				link.download = 'announcements';
+				link.href = dataUrl;
+				link.click();
+				link.remove();
 			})
 			.catch(function (error) {
 				console.error('Something went wrong!', error);
 			});
 	};
+
+	let dayEntries = _dayEntries;
 </script>
 
-<main class="mx-auto w-[210mm]">
-	<div bind:this={printable} class="bg-corn_silk text-bittersweet">
-		<section class="text-center">
-			<div>
-				<h1 contenteditable="true" class="text-2xl">El Shaddai Prayer House</h1>
-				<h3 contenteditable="true" class="text-base">R.K.Puram, Hyderabad, Telangana</h3>
-			</div>
-			<h2 contenteditable="true" class="mt-3 text-4xl">Weekly Announcements</h2>
+<main class="mx-auto mt-10 w-[210mm]">
+	<div bind:this={printable} class="rounded-xl bg-corn_silk p-10">
+		<section class=" text-center">
+			<h2
+				contenteditable="true"
+				class="font-courgette text-5xl text-venetian_red"
+				spellcheck="false"
+			>
+				El Shaddai invites
+			</h2>
+			<p contenteditable="true" class="mt-1 font-courgette text-lg text-venetian_red/90">
+				@ R.K Puram, Hyderabad [15th - 20th April]
+			</p>
 		</section>
-		<section class="mt-5" bind:this={tableMarkup}>
-			<div class="grid grid-cols-12" bind:this={dayMarkup}>
-				<div class="col-span-3 flex gap-5">
-					<p contenteditable="true" class="text-5xl">07</p>
-					<div class="flex flex-col gap-1">
-						<p contenteditable="true" class="text-lg">Monday</p>
-						<p contenteditable="true" class="text-lg">సోమవారం</p>
-					</div>
-				</div>
-				<div class="col-span-9">
-					<div class="grid grid-cols-12 gap-2 pb-2">
-						<p contenteditable="true" class="col-span-4 whitespace-nowrap text-base leading-7">
-							07:00 P.M - 08:00 P.M
-						</p>
-						<div class="col-span-8 flex flex-col gap-1">
-							<p contenteditable="true" class="text-lg">Bible study</p>
-							<p contenteditable="true" class="text-lg">బైబిల్ స్టడీ</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+		<ul
+			bind:this={tableMarkup}
+			class="mt-5 flex flex-col gap-5 divide-y-2 divide-dotted divide-venetian_red/90 rounded-xl border-2 border-dotted border-venetian_red p-5 font-roboto font-medium"
+		>
+			{#each dayEntries as day, i (i)}
+				<DayEntry data={day} />
+			{/each}
+		</ul>
 	</div>
 </main>
 
-<button
-	on:click={() => {
-		let clone = dayMarkup.cloneNode(true);
-		tableMarkup.appendChild(clone);
-	}}>Add day</button
->
-<button on:click={() => generateImage(printable)}>Generate Image</button>
+<div class="fixed right-10 top-10 flex flex-col gap-5">
+	<button
+		class="btn"
+		on:click={() => {
+			dayEntries = [...dayEntries, dayEntries[-1]];
+		}}>+ Add day</button
+	>
+	<button class="btn" on:click={() => downloadImage(printable)}>Download</button>
+</div>
 
 <style lang="postcss">
 	@page {
 		size: A4;
+	}
+
+	.btn {
+		@apply rounded-xl bg-regal_blue px-4 py-2 text-white;
 	}
 </style>
