@@ -4,5 +4,6 @@
 	<div class="mt-10 flex flex-col">
 		<a href="/announcements-builder" class="underline">Announcement builder</a>
 		<a href="/transliterator" class="underline">Transliterator</a>
+		<a href="/hike-analyser" class="underline">Hike analyser</a>
 	</div>
 </main>

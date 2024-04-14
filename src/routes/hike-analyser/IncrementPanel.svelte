@@ -1,12 +1,15 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import Increment from './Increment.svelte';
+	import { fly } from 'svelte/transition';
 
 	export let id: string;
 
-	let increments: number[] = [0];
+	let baseSalary: number = 50000;
 
-	let baseSalary: number = 10000;
+	let increments: { value: number; baseSalary: number; perMonth: number }[] = [
+		{ value: 0, baseSalary, perMonth: baseSalary }
+	];
 
 	let formEl: HTMLFormElement;
 
@@ -16,7 +19,6 @@
 
 	const getGrandTotal = () => {
 		const incrementTotalEls = formEl.querySelectorAll('input[name="increment_total"]');
-		console.log('incrementTotalEls', incrementTotalEls);
 		if (incrementTotalEls.length > 0) {
 			const incrementValues = (Array.from(incrementTotalEls) as HTMLInputElement[]).map((item) =>
 				Number(item.value)
@@ -31,36 +33,112 @@
 
 	const addIncrement = () => {
 		if (increments.length < 4) {
-			increments = [...increments, 0];
+			increments = [
+				...increments,
+				{
+					value: 0,
+					baseSalary: getBaseSalary(increments.length),
+					perMonth: getBaseSalary(increments.length)
+				}
+			];
 		} else {
 			alert(`Don't get greedy!`);
 		}
 	};
-	const removeIncrement = () => {
+	const removeIncrement = async () => {
 		if (increments.length > 1) {
 			increments = increments.slice(0, increments.length - 1);
+			await changeHandler();
 		} else {
-			alert(`You deserve a raise, don't stoop!`);
+			alert(`You deserve a raise, hold on!`);
 		}
+	};
+
+	const getBaseSalary = (index: number) => {
+		if (index === 0) {
+			return baseSalary;
+		}
+		return increments[index - 1].perMonth;
+	};
+
+	const getEffectiveHike = () => {
+		if (baseSalary && increments.length > 0) {
+			let hikes = increments.map((item) => item.value);
+			return hikes.reduce((prev, current) => {
+				return prev * (1 + current / 100);
+			});
+		} else return 0;
+	};
+
+	let showActions: boolean = false;
+
+	const changeHandler = async () => {
+		increments.forEach((increment, i) => (increment.baseSalary = getBaseSalary(i)));
+		increments = increments;
+		await tick();
+		grandTotal = getGrandTotal();
 	};
 </script>
 
-<div {id}>
-	<form bind:this={formEl} on:input={() => (grandTotal = getGrandTotal())}>
-		<label for="base_salary">Base salary (per month)</label>
-		<input type="number" name="base_salary" id="base_salary" bind:value={baseSalary} />
+<!-- svelte-ignore a11y-no-static-element-interactions -->
+<div
+	{id}
+	class="relative {$$props.class || ''} h-max"
+	transition:fly={{ x: -100 }}
+	on:mouseenter={() => (showActions = true)}
+	on:mouseleave={() => (showActions = false)}
+>
+	<form bind:this={formEl} on:input={changeHandler} class="text-gray-800">
+		<div class="flex flex-col">
+			<label for="base_salary" class="mb-0.5 text-sm text-gray-700">Base salary (per month)</label>
+			<input
+				type="number"
+				name="base_salary"
+				id="base_salary"
+				bind:value={baseSalary}
+				on:input={changeHandler}
+				class="w-full rounded-xl bg-gray-100 p-2"
+			/>
+		</div>
 
 		{#if increments.length > 0}
-			{#each increments as increment, i (i)}
-				<Increment index={i} bind:value={increment} bind:increments bind:baseSalary />
-			{/each}
+			<div class="mt-5 flex flex-col gap-5">
+				{#each increments as increment, i (i)}
+					<Increment
+						index={i}
+						bind:value={increment.value}
+						bind:increments
+						baseSalary={getBaseSalary(i)}
+					/>
+				{/each}
+			</div>
 		{/if}
 	</form>
-
-	<div>
-		<button on:click={addIncrement}>Add Increment</button>
-		<button on:click={removeIncrement}>Remove Increment</button>
+	<div class="mt-5 flex justify-between gap-3">
+		<button
+			on:click={addIncrement}
+			class="flex flex-1 items-center justify-center rounded-lg bg-black px-4 py-2 text-xs font-medium text-white"
+			>+ increment</button
+		>
+		<button
+			on:click={removeIncrement}
+			class="flex flex-1 items-center justify-center rounded-lg border bg-black px-4 py-2 text-xs font-medium text-white invert"
+			>- increment</button
+		>
 	</div>
 
-	<p>Grand Total : {numberFormatter.format(grandTotal)}</p>
+	<div class="mt-5 flex flex-col text-xl font-medium lg:flex-row lg:justify-between">
+		{#key grandTotal}
+			<div class="grid grid-cols-12 justify-between lg:flex lg:gap-1">
+				<p class="col-span-6">Effective hike</p>
+				<p class="col-span-1">:</p>
+				<p class="col-span-5 text-right">{numberFormatter.format(getEffectiveHike())} %</p>
+			</div>
+		{/key}
+		<div class="grid grid-cols-12 justify-between lg:flex lg:gap-1">
+			<p class="col-span-6">Grand Total</p>
+			<p class="col-span-1">:</p>
+			<p class="col-span-5 text-right">{numberFormatter.format(grandTotal)}</p>
+		</div>
+	</div>
 </div>
