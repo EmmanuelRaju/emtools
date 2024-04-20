@@ -12,6 +12,6 @@
 	<p contenteditable="true" class="col-span-3 text-base leading-7">{item.time}</p>
 	<div class="col-span-9 flex flex-col gap-1">
 		<p contenteditable="true" class="text-lg">{item.desc.en}</p>
-		<p contenteditable="true" class="text-base">{item.desc.te}</p>
+		<p contenteditable="true" class="text-base text-regal_blue">{item.desc.te}</p>
 	</div>
 </li>

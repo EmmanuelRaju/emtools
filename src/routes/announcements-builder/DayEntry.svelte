@@ -31,7 +31,7 @@
 		{/if}
 		<div class="flex flex-col gap-1">
 			<p contenteditable="true" class="text-lg">{data.day.en}</p>
-			<p contenteditable="true" class="text-base">{data.day.te}</p>
+			<p contenteditable="true" class="text-base text-regal_blue">{data.day.te}</p>
 		</div>
 	</div>
 	<ul class="col-span-9 border-l-2 border-venetian_red/90 pl-5">
@@ -39,7 +39,7 @@
 			<DayItem item={entry} />
 		{/each}
 	</ul>
-	<div class="absolute right-0 top-0 hidden gap-2 group-hover:flex">
+	<div class="absolute right-0 top-0 mt-1 hidden gap-2 group-hover:flex">
 		<button class="btn" on:click={() => markup.remove()}>- Day</button>
 		<button
 			class="btn"
@@ -68,6 +68,6 @@
 
 <style lang="postcss">
 	.btn {
-		@apply border border-dashed border-venetian_red px-3 py-2 text-xs;
+		@apply rounded-md border border-dashed border-venetian_red px-3 py-2 text-xs hover:bg-venetian_red hover:text-corn_silk;
 	}
 </style>
