@@ -1,6 +1,6 @@
 export const dayEntries = [
 	{
-		date: '15',
+		date: '22',
 		day: {
 			en: 'Monday',
 			te: 'సోమవారం'
@@ -16,7 +16,7 @@ export const dayEntries = [
 		]
 	},
 	{
-		date: '16',
+		date: '23',
 		day: {
 			en: 'Tuesday',
 			te: 'మంగళవారం'
@@ -32,7 +32,7 @@ export const dayEntries = [
 		]
 	},
 	{
-		date: '17',
+		date: '24',
 		day: {
 			en: 'Wednesday',
 			te: 'బుధవారం'
@@ -48,7 +48,7 @@ export const dayEntries = [
 		]
 	},
 	{
-		date: '18',
+		date: '25',
 		day: {
 			en: 'Thursday',
 			te: 'గురువారం'
@@ -64,7 +64,7 @@ export const dayEntries = [
 		]
 	},
 	{
-		date: '19',
+		date: '26',
 		day: {
 			en: 'Friday',
 			te: 'శుక్రవారం'
@@ -80,7 +80,7 @@ export const dayEntries = [
 		]
 	},
 	{
-		date: '20',
+		date: '27',
 		day: {
 			en: 'Saturday',
 			te: 'శనివారం'

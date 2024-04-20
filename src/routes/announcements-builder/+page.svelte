@@ -10,10 +10,6 @@
 		htmlToImage
 			.toPng(node)
 			.then(function (dataUrl) {
-				// let img = new Image();
-				// img.src = dataUrl;
-				// img.style.marginTop = '40px';
-				// document.body.appendChild(img);
 				let link = document.createElement('a');
 				link.download = 'announcements';
 				link.href = dataUrl;
@@ -36,10 +32,10 @@
 				class="font-courgette text-5xl text-venetian_red"
 				spellcheck="false"
 			>
-				El Shaddai invites
+				El Shaddai Announcements
 			</h2>
 			<p contenteditable="true" class="mt-1 font-courgette text-lg text-venetian_red/90">
-				@ R.K Puram, Hyderabad [15th - 20th April]
+				@ R.K Puram, Hyderabad [22nd - 27th April]
 			</p>
 		</section>
 		<ul
