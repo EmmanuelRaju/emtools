@@ -5,18 +5,20 @@
 		'JS',
 		'Svelte',
 		'SvelteKit',
+		'React',
+		'React Native',
+		'Expo',
+		'Node JS',
 		'11Ty',
 		'Cypress',
 		'Jest',
-		'React',
-		'Django',
-		'IoT',
+		'MongoDB',
 		'Redux',
-		'React-Native',
 		'Git',
-		'Powerpoint',
-		'Word',
-		'Excel'
+		'Figma'
+		// 'Powerpoint',
+		// 'Word',
+		// 'Excel'
 	];
 </script>
 

@@ -1,6 +1,10 @@
 <script>
 	let credentials = [
 		{
+			text: 'Scaler Academy',
+			subtext: 'Pursuing the course to gain expertise in Software Engineering'
+		},
+		{
 			text: 'The Complete 2020 Web Development Bootcamp',
 			subtext: 'A full-stack course on web development by Dr. Angela Yu (Udemy)'
 		},

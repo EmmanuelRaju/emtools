@@ -6,19 +6,19 @@
 <ul id="contact">
 	<li>
 		<Icon kind="mail" />
-		<p>eraj007@gmail.com</p>
+		<a href="mailto:eraj007@gmail.com">eraj007@gmail.com</a>
 	</li>
 	<li>
-		<Icon kind="phone" />
-		<p>+91-7989234688</p>
+		<Icon kind="whatsapp" />
+		<a href="https://wa.me/+917989234688">+91-7989234688</a>
 	</li>
 	<li>
 		<Icon kind="pin" />
 		<p>Hyderabad, India</p>
 	</li>
-	<li class="ml-2">
+	<li>
 		<Icon kind="linkedIn" />
-		<a href="https://linkedin.com/in/emmanuel-raju" target="_blank">
+		<a href="https://linkedin.com/in/emmanuel-raju" target="_blank" class="mt-2">
 			linkedin.com/in/emmanuel-raju
 		</a>
 	</li>

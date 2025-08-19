@@ -8,7 +8,7 @@
 			achievements: [
 				'Appreciated for picking up new skills in a very short time',
 				'Promoted to take up LEAD responsibilities in just 6 months after joining',
-				'Contributing to 7 ongoing projects'
+				'Contributed to 20+ projects'
 			]
 		},
 		{
@@ -40,7 +40,7 @@
 <section id="experience">
 	<h2 class="section-title">WORK EXPERIENCE</h2>
 
-	<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10 md:gap-y-5">
+	<div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-10">
 		{#each experiences as experience, i}
 			<div class:col-span-full={i == 0}>
 				<h3 class="title">{experience.role}</h3>

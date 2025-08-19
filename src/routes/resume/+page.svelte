@@ -9,6 +9,7 @@
 	import Header from './components/Header.svelte';
 	import Projects from './components/Projects.svelte';
 	import Skills from './components/Skills.svelte';
+	import AboutMe from './components/AboutMe.svelte';
 </script>
 
 <svelte:head>
@@ -20,10 +21,11 @@
 	/>
 	<title>Emmanuel's Resume</title>
 </svelte:head>
-<main class="flex flex-col justify-center bg-white">
+<main id="resume-container" class="flex flex-col justify-center bg-white">
 	<Header />
 	<Contact />
 	<div class="px-8 pb-10 pt-6">
+		<AboutMe />
 		<Skills />
 		<Experience />
 		<Projects />
