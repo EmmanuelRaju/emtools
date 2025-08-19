@@ -3,7 +3,7 @@
 
 	const expense: Expense = new Expense('expense');
 
-	let addPersonForm: HTMLFormElement;
+	let addPersonForm: HTMLFormElement, addExpenseForm: HTMLFormElement;
 
 	let persons: Person[] = [];
 
@@ -14,7 +14,7 @@
 			const person = new Person(personObj.name as string);
 			if (personObj.upiId) person.upiId = personObj.upiId as string;
 			if (personObj.gender) person.gender = personObj.gender as 'male' | 'female';
-			persons.push(person);
+			persons = [...persons, person];
 			console.log('persons', persons);
 			addPersonForm.reset();
 		}
@@ -34,5 +34,21 @@
 	<label for="genderMale">male</label>
 	<input type="radio" name="gender" id="genderFemale" value="female" />
 	<label for="genderFemale">female</label>
+	<button type="submit">Add</button>
+</form>
+
+<form bind:this={addExpenseForm} name="addExpense">
+	<h2>add expense</h2>
+	<label for="name">name<span>*</span></label>
+	<input type="text" name="name" id="name" />
+	<label for="amount">amount<span>*</span></label>
+	<input type="number" name="amount" id="amount" required />
+	<div>
+		<p>paid by</p>
+		{#each persons as person}
+			<input type="checkbox" name="paidBy" id={person.id} value={person.id} />
+			<label for={person.id}>{person.name}</label>
+		{/each}
+	</div>
 	<button type="submit">Add</button>
 </form>

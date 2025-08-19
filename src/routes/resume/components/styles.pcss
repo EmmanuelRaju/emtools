@@ -1,0 +1,56 @@
+/* Global */
+* {
+	font-family: 'Poppins', sans-serif;
+}
+
+body {
+	@apply bg-secondary m-auto max-w-[210mm];
+}
+h1 {
+	@apply text-3xl font-semibold;
+}
+h2 {
+	@apply text-xl;
+}
+h3 {
+	@apply text-lg;
+}
+h4 {
+	@apply text-base;
+}
+
+section {
+	@apply my-4;
+}
+
+section:nth-child(1) {
+	@apply mb-4 mt-0;
+}
+
+.section-title {
+	@apply text-accent font-medium underline underline-offset-4;
+}
+
+.title {
+	@apply mt-2 font-bold;
+}
+.sub-title {
+	@apply font-medium;
+}
+.timeline {
+	@apply text-accent mt-2 flex justify-between text-xs font-medium italic;
+}
+.list-heading {
+	@apply text-accent mt-2 text-xs font-medium italic;
+}
+.list-title {
+	@apply mt-2 font-semibold;
+}
+
+.list {
+	@apply marker:text-accent my-2 ml-5 list-disc;
+}
+
+.list li {
+	@apply my-1;
+}
